@@ -8,77 +8,54 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+struct HabitEntry: TimelineEntry {
+    let date: Date
+    let habitName: String
+    let completedDays: Int
+}
+
+struct HabitProvider: TimelineProvider {
+    func placeholder(in context: Context) -> HabitEntry {
+        HabitEntry(date: Date(), habitName: "Reading", completedDays: 5)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+    func getSnapshot(in context: Context, completion: @escaping (HabitEntry) -> Void) {
+        let entry = HabitEntry(date: Date(), habitName: "Reading", completedDays: 5)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<HabitEntry>) -> Void) {
+        let entry = HabitEntry(date: Date(), habitName: "Reading", completedDays: 5)
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
-
-//    func relevances() async -> WidgetRelevances<Void> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let emoji: String
-}
-
-struct HabitTrackerWidgetEntryView : View {
-    var entry: Provider.Entry
+struct HabitTrackerWidgetEntryView: View {
+    var entry: HabitProvider.Entry
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+            Text(entry.habitName)
+                .font(.headline)
+                .padding()
+            Text("Days in a row: \(entry.completedDays)")
+                .font(.subheadline)
         }
+        .containerBackground(.fill.tertiary, for: .widget)
     }
 }
+
 
 struct HabitTrackerWidget: Widget {
     let kind: String = "HabitTrackerWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                HabitTrackerWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                HabitTrackerWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+        StaticConfiguration(kind: kind, provider: HabitProvider()) { entry in
+            HabitTrackerWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Habit Tracker")
+        .description("Track your habits right from your screen!")
+        .supportedFamilies([.systemSmall])
     }
-}
-
-#Preview(as: .systemSmall) {
-    HabitTrackerWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
 }
