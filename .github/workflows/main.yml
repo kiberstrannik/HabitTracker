@@ -1,0 +1,21 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+
+    - name: Set up Xcode
+      run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+    - name: Build app
+      run: xcodebuild -scheme HabitTracker -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0' build
