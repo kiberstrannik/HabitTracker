@@ -23,7 +23,7 @@ Built entirely with **SwiftUI** and structured using the **MVVM** architecture.
 <img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-07-18 at 00 47 57" src="https://github.com/user-attachments/assets/282f0305-564b-4f41-ac34-7cb187e4e049" />
 <img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-07-18 at 00 48 15" src="https://github.com/user-attachments/assets/f13171e6-c567-4c1b-9201-b4da8798fa90" />
 <img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-07-18 at 00 48 33" src="https://github.com/user-attachments/assets/3f2390ec-23b2-4eff-96e4-59e6e6e6f4ad" />
-<img width="653" height="988" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-07-18 at 00 41 48" src="https://github.com/user-attachments/assets/85a50e59-367f-4b26-ac6d-181d875775fb" />
+<img width="644" height="972" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-07-20 at 17 43 52" src="https://github.com/user-attachments/assets/92cb3464-789e-4bf4-a99d-3ec10279f8d9" />
 
 
 
