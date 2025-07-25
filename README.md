@@ -37,3 +37,10 @@ To run the app locally:
 git clone https://github.com/kiberstrannik/habit-tracker.git
 cd habit-tracker
 open HabitTracker.xcodeproj
+
+👨‍💻 Author
+Made with ❤️ by Nikita Beliak
+
+📧 bams.boby@gmail.com
+📍 Warsaw, Poland
+🌐 GitHub: github.com/NikitaBeliak
